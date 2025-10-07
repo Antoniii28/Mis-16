@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invitación Mis 16 - Adamari</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background-color: #f0f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        /* Partículas mágicas */
+        .particles-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background-color: rgba(76, 175, 80, 0.7);
+            border-radius: 50%;
+            box-shadow: 0 0 10px 2px rgba(76, 175, 80, 0.5);
+            animation: float 15s infinite linear;
+        }
+        
+        .particle:nth-child(2n) {
+            background-color: rgba(139, 195, 74, 0.7);
+            box-shadow: 0 0 10px 2px rgba(139, 195, 74, 0.5);
+            animation-duration: 20s;
+        }
+        
+        .particle:nth-child(3n) {
+            background-color: rgba(255, 215, 0, 0.7);
+            box-shadow: 0 0 10px 2px rgba(255, 215, 0, 0.5);
+            animation-duration: 25s;
+        }
+        
+        .particle:nth-child(4n) {
+            background-color: rgba(255, 152, 0, 0.7);
+            box-shadow: 0 0 10px 2px rgba(255, 152, 0, 0.5);
+            animation-duration: 18s;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100px) translateX(calc(100vw - 100px));
+                opacity: 0;
+            }
+        }
+        
+        .invitation-container {
+            width: 100%;
+            max-width: 400px;
+            background-color: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            position: relative;
+            z-index: 10;
+        }
+        
+        .header {
+            background: linear-gradient(to bottom, rgba(139, 195, 74, 0.9), rgba(76, 175, 80, 0.9));
+            color: white;
+            padding: 25px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 5px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+        
+        .header::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('https://images.unsplash.com/photo-1579546929662-711aa81148cf?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80');
+            background-size: cover;
+            background-position: center;
+            opacity: 0.3;
+            z-index: -1;
+        }
+        
+        .content {
+            padding: 20px;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .birthday-info {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+        
+        .birthday-info h2 {
+            color: #4caf50;
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+        
+        .birthday-info p {
+            color: #555;
+            font-size: 16px;
+            margin-bottom: 5px;
+        }
+        
+        .countdown {
+            background-color: #f8f9fa;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 25px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        
+        .countdown h3 {
+            color: #4caf50;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .countdown-timer {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+        }
+        
+        .countdown-item {
+            text-align: center;
+        }
+        
+        .countdown-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4caf50;
+            background-color: white;
+            border-radius: 10px;
+            padding: 10px;
+            width: 60px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .countdown-label {
+            font-size: 12px;
+            color: #777;
+            margin-top: 5px;
+        }
+        
+        .buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn i {
+            margin-right: 10px;
+            font-size: 18px;
+        }
+        
+        .btn-download {
+            background-color: #4caf50;
+            color: white;
+        }
+        
+        .btn-download:hover {
+            background-color: #3d8b40;
+            transform: translateY(-2px);
+        }
+        
+        .btn-location {
+            background-color: #2196f3;
+            color: white;
+        }
+        
+        .btn-location:hover {
+            background-color: #0b7dda;
+            transform: translateY(-2px);
+        }
+        
+        .btn-party {
+            background-color: #ff9800;
+            color: white;
+        }
+        
+        .btn-party:hover {
+            background-color: #e68900;
+            transform: translateY(-2px);
+        }
+        
+        .footer {
+            text-align: center;
+            padding: 15px;
+            color: #777;
+            font-size: 14px;
+            border-top: 1px solid #eee;
+        }
+        
+        .fairy-decoration {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="%234caf50"><path d="M12 2C13.1 2 14 2.9 14 4C14 5.1 13.1 6 12 6C10.9 6 10 5.1 10 4C10 2.9 10.9 2 12 2ZM21 9V7L15 5.5C14.8 5.2 14.4 5 14 5H10C9.6 5 9.2 5.2 9 5.5L3 7V9L9 10.5C9.2 10.8 9.6 11 10 11H14C14.4 11 14.8 10.8 15 10.5L21 9ZM12 15C13.1 15 14 15.9 14 17C14 18.1 13.1 19 12 19C10.9 19 10 18.1 10 17C10 15.9 10.9 15 12 15Z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            opacity: 0.7;
+            z-index: 0;
+        }
+        
+        .fairy-1 {
+            top: 10px;
+            left: 10px;
+            transform: rotate(-15deg);
+        }
+        
+        .fairy-2 {
+            bottom: 10px;
+            right: 10px;
+            transform: rotate(15deg);
+        }
+        
+        .magic-text {
+            font-weight: bold;
+            background: linear-gradient(45deg, #4caf50, #ff9800, #2196f3);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <!-- Contenedor de partículas mágicas -->
+    <div class="particles-container" id="particles-container"></div>
+    
+    <div class="invitation-container">
+        <div class="fairy-decoration fairy-1"></div>
+        <div class="fairy-decoration fairy-2"></div>
+        
+        <div class="header">
+            <h1>No Faltes</h1>
+            <p>Invitación Especial</p>
+        </div>
+        
+        <div class="content">
+            <div class="birthday-info">
+                <h2 class="magic-text">Adamari</h2>
+                <p>¡Cumple <span class="magic-text">16 años</span>!</p>
+                <p id="event-date">Sábado, 6 de Diciembre del 2025</p>
+                <p id="event-time">12:00 PM</p>
+            </div>
+            
+            <div class="countdown">
+                <h3>Cuenta Regresiva</h3>
+                <div class="countdown-timer">
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="days">00</div>
+                        <div class="countdown-label">Días</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="hours">00</div>
+                        <div class="countdown-label">Horas</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="minutes">00</div>
+                        <div class="countdown-label">Minutos</div>
+                    </div>
+                    <div class="countdown-item">
+                        <div class="countdown-number" id="seconds">00</div>
+                        <div class="countdown-label">Segundos</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="buttons">
+                <a href="pdf/invitación.pdf" download="Invitacion_Adamari.pdf" class="btn btn-download" id="download-btn">
+                    <i class="fas fa-download"></i> Descargar Invitación PDF
+                </a>
+                <a href="https://maps.app.goo.gl/XVsvLXChDqy2DNwn8" target="_blank" class="btn btn-location">
+                    <i class="fas fa-church"></i> Ubicación de la Misa
+                </a>
+                <a href="https://maps.app.goo.gl/uudTqchNenhQQRCW9" target="_blank" class="btn btn-party">
+                    <i class="fas fa-birthday-cake"></i> Lugar de la Fiesta
+                </a>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p>¡Esperamos verte en esta celebración mágica!</p>
+        </div>
+    </div>
+
+    <script>
+        // Crear partículas mágicas
+        function createParticles() {
+            const container = document.getElementById('particles-container');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Posición inicial aleatoria
+                const startX = Math.random() * window.innerWidth;
+                const startY = Math.random() * window.innerHeight;
+                
+                particle.style.left = startX + 'px';
+                particle.style.top = startY + 'px';
+                
+                // Tamaño aleatorio
+                const size = 4 + Math.random() * 4;
+                particle.style.width = size + 'px';
+                particle.style.height = size + 'px';
+                
+                // Retraso de animación aleatorio
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                
+                container.appendChild(particle);
+            }
+        }
+        
+        // Configurar la fecha del evento
+        const eventDate = new Date('December 6, 2025 12:00:00').getTime();
+        
+        // Actualizar la cuenta regresiva cada segundo
+        const countdownFunction = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+            
+            // Cálculos de tiempo
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            // Mostrar resultados
+            document.getElementById("days").innerHTML = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerHTML = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerHTML = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerHTML = seconds < 10 ? "0" + seconds : seconds;
+            
+            // Si la cuenta regresiva termina
+            if (distance < 0) {
+                clearInterval(countdownFunction);
+                document.getElementById("days").innerHTML = "00";
+                document.getElementById("hours").innerHTML = "00";
+                document.getElementById("minutes").innerHTML = "00";
+                document.getElementById("seconds").innerHTML = "00";
+            }
+        }, 1000);
+        
+        // Función para generar PDF (simulada)
+        document.getElementById('download-btn').addEventListener('click', function(e) {
+            console.log('Descargando PDF de invitación...');
+        });
+        
+        // Inicializar partículas cuando la página cargue
+        window.addEventListener('load', createParticles);
+    </script>
+</body>
+</html>
